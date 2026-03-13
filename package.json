@@ -23,6 +23,7 @@
     "test": "vitest --dir test --config vitest.config.ts --run",
     "test:watch": "vitest --dir test --config vitest.config.ts",
     "api-docs": "typedoc src",
+    "bench": "vitest bench --dir benchmarks --config vitest.config.ts --run",
     "ci": "pnpm build && pnpm lint && pnpm test"
   },
   "lint-staged": {
