@@ -7,7 +7,7 @@ const log = logger("newline-set");
 
 function readLines(filePath: string): string[] {
   try {
-    return readFileSync(filePath, "utf8").split("\n").filter(Boolean);
+    return readFileSync(filePath, "utf8").split("\n").map((s) => s.trim()).filter(Boolean);
   } catch (err: unknown) {
     if ((err as NodeJS.ErrnoException).code === "ENOENT") {
       return [];

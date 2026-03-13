@@ -109,6 +109,20 @@ describe("newlineSet", () => {
     await stop();
   });
 
+  it("trims whitespace from entries", async () => {
+    const file = tmpFile();
+    writeFileSync(file, "  apple  \n  banana\ncherry  \r\n");
+
+    const { set, stop } = newlineSet(file);
+
+    expect(set.size).toBe(3);
+    expect(set.has("apple")).toBe(true);
+    expect(set.has("banana")).toBe(true);
+    expect(set.has("cherry")).toBe(true);
+
+    await stop();
+  });
+
   it("does not update set after stop", async () => {
     const file = tmpFile();
     writeFileSync(file, "initial\n");
