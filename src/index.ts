@@ -1,15 +1,13 @@
-import { readFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
 import { logger } from "@libp2p/logger";
 import { watch } from "chokidar";
+import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
 
 const log = logger("newline-set");
 
 function readLines(filePath: string): string[] {
   try {
-    return readFileSync(filePath, "utf8")
-      .split("\n")
-      .filter(Boolean);
+    return readFileSync(filePath, "utf8").split("\n").filter(Boolean);
   } catch (err: unknown) {
     if ((err as NodeJS.ErrnoException).code === "ENOENT") {
       return [];
@@ -18,11 +16,9 @@ function readLines(filePath: string): string[] {
   }
 }
 
-export function newlineSet(filePath: string): {
-  set: Set<string>;
-  ready: Promise<void>;
-  stop: () => Promise<void>;
-} {
+export function newlineSet(
+  filePath: string,
+): { set: Set<string>; ready: Promise<void>; stop: () => Promise<void>; } {
   const absPath = resolve(filePath);
   const set = new Set<string>(readLines(absPath));
   log("initialized with %d items from %s", set.size, absPath);

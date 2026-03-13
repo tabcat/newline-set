@@ -1,16 +1,14 @@
 import { randomBytes } from "node:crypto";
-import {
-  mkdirSync,
-  rmSync,
-  unlinkSync,
-  writeFileSync,
-} from "node:fs";
+import { mkdirSync, rmSync, unlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { newlineSet } from "../src/index.js";
 
-const dir = join(tmpdir(), "newline-set-test-" + randomBytes(4).toString("hex"));
+const dir = join(
+  tmpdir(),
+  "newline-set-test-" + randomBytes(4).toString("hex"),
+);
 
 function tmpFile(): string {
   return join(dir, randomBytes(4).toString("hex") + ".txt");
